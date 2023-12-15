@@ -12,7 +12,7 @@ namespace mlibc {
     }
 
     [[noreturn]] void sys_libc_panic() {
-        syscall1(SYSCALL_EXIT, (syscall_int_t) -0xDEAD);
+        syscall1(SYSCALL_EXIT, (syscall_int_t) 666);
         __builtin_unreachable();
     }
 
