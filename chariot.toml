@@ -206,6 +206,7 @@ configure = [
         -Ddisable_linux_option=true \
         -Dlinux_kernel_headers=$SOURCE:linux-headers/include/include/linux \
         --buildtype=debug \
+        -Ddefault_library=both \
         $SOURCE:mlibc
     """
 ]
@@ -229,6 +230,6 @@ install = ["DESTDIR=$INSTALL PREFIX=$PREFIX make install"]
 
 [target.root]
 dependencies = ["mlibc", "test", "host:rdsk"]
-configure = ["mkdir $ROOT/modules"] # Violates chariot principles...
+configure = ["mkdir $ROOT/modules", "mkdir $ROOT/tmp"] # Violates chariot principles...
 build = ["rdsk -c $ROOT -o root.rdk"]
 install = ["cp root.rdk $INSTALL/root.rdk"]

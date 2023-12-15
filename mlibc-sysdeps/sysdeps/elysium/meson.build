@@ -62,7 +62,7 @@ if not headers_only
 	crt = custom_target('crt0',
 		build_by_default: true,
 		command: c_compiler.cmd_array() + ['-c', '-o', '@OUTPUT@', '@INPUT@'],
-		input: 'x86_64/crt/crt0.S',
+		input: host_machine.cpu_family() / 'crt/crt0.S',
 		output: 'crt0.o',
 		install: true,
 		install_dir: get_option('libdir')

@@ -4,21 +4,16 @@
 #include <stdint.h>
 
 #define SYSCALL_EXIT 0
-#define SYSCALL_WRITE 1
-#define SYSCALL_FB 2
-#define SYSCALL_KBIN 3
-#define SYSCALL_DBG 4
-#define SYSCALL_VMM_MAP 5
-#define SYSCALL_OPEN 6
-#define SYSCALL_READ 7
-#define SYSCALL_SEEK 8
+#define SYSCALL_DEBUG 1
+#define SYSCALL_ALLOC_ANON 2
+#define SYSCALL_FS_SET 10
 
 #define DEFINE_SYSCALL(...)                     \
     syscall_return_t ret;                       \
     asm volatile("syscall"                      \
-        : "=a" (ret.value), "=b" (ret.errno)    \
+        : "=a" (ret.value), "=b" (ret.err)      \
         : __VA_ARGS__                           \
-        : "rcx", "r11", "memory"         \
+        : "rcx", "r11", "memory"                \
     );                                          \
     return ret;
 
@@ -28,7 +23,7 @@ extern "C" {
 
     typedef struct {
         syscall_int_t value;
-        syscall_int_t errno;
+        syscall_int_t err;
     } syscall_return_t;
 
     static syscall_return_t syscall0(int sc) {
