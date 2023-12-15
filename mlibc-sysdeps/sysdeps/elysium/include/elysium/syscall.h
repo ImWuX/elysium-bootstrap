@@ -17,7 +17,9 @@
     );                                          \
     return ret;
 
+#ifdef __cplusplus
 extern "C" {
+#endif
 
     typedef long unsigned int syscall_int_t;
 
@@ -60,6 +62,8 @@ extern "C" {
         DEFINE_SYSCALL("a" (sc), "D" (arg1), "S" (arg2), "d" (arg3), "r" (arg4_reg), "r" (arg5_reg), "r" (arg6_reg));
     }
 
+#ifdef __cplusplus
 }
+#endif
 
 #endif
